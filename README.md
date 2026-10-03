@@ -70,7 +70,14 @@ screenshots).
 
 ## Release setup (once per game repo)
 
-Repo → Settings → Secrets and variables → Actions:
+Run this yourself in a terminal. It asks for the passwords, creates the signing keystore outside the
+repo (`%USERPROFILE%\.keystores\<game>.keystore`) and uploads everything below to GitHub:
+
+```bash
+powershell -ExecutionPolicy Bypass -File Tools/setup-release-secrets.ps1
+```
+
+Or set them by hand in Repo → Settings → Secrets and variables → Actions:
 
 | Secret / variable | Value |
 |---|---|
