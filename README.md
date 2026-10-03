@@ -13,7 +13,7 @@ builds. Every portfolio game starts here (*Tailwind*, *Cadence Club*, *Night Cou
 |---|---|
 | **Core (pure C#)** | State machine, deterministic PCG32 random numbers, CSV master data with line-numbered errors, versioned saves with migrations and backup fallback, MVP presenter base, clock abstraction. **No UnityEngine**, so it's unit-tested with `dotnet test` in seconds. |
 | **Runtime** | Boot flow (Boot → Title → Game) with fades, service registry, crash-safe file saves, music crossfade and SFX pool, Android haptics, safe area, screen stack with back-button handling, game-feel helpers (punch, shake, hit-stop, flash, floating text), debug overlay (FPS, memory, reset save) |
-| **Sample** | Title screen + settings popup (MVP) + a 10-second tap game + results. It uses every system above. Delete it when you start a real game. |
+| **Sample** | Title screen + a 10-second tap game + results, using the shared settings popup (MVP). It uses every system above. Delete it when you start a real game. |
 | **Editor** | `Template > Apply Project Setup` (player settings, scenes, build list in code), `Template > Build > …`, `Template > Import Master Data` (CSV → ScriptableObject) |
 | **CI** | Core tests on every push (dotnet, no licence); Unity EditMode tests via GameCI; **tag `v*` → APK + AAB + Windows zip → GitHub Release + itch.io** |
 
@@ -41,13 +41,23 @@ Localization, Newtonsoft JSON, Test Framework. See `Tools/setup/template-package
 3. Change the identity in `Assets/_Project/Editor/Setup/TemplateSetup.cs` (`productName`, application
    id `com.tranvantruong.<game>`) and re-run **Apply Project Setup**.
 4. Edit `SaveSchema` (`Assets/_Project/Scripts/Core/Save/SaveMigrator.cs`) for your game's save data.
-5. Delete `Assets/_Project/Scripts/Runtime/Game/Sample/` and build your own scenes.
+5. Point `CreateScene("Title", …)` and `CreateScene("Game", …)` in `TemplateSetup.cs` at your own
+   controllers (add your runtime assembly to `Template.Editor.asmdef`), then delete
+   `Assets/_Project/Scripts/Runtime/Game/Sample/` and re-run **Apply Project Setup**. The settings popup
+   (`UI/SettingsPanelView`) is shared, so it stays.
 
 ## Everyday commands
 
 ```bash
 dotnet test Tools/CoreTests/Template.Core.Tests.csproj     # core logic tests, ~5 s
 ```
+
+```bash
+powershell -ExecutionPolicy Bypass -File Tools/run-unity-tests.ps1   # all EditMode tests inside Unity, headless
+```
+
+Add `-TestPlatform PlayMode -Graphics` for PlayMode tests that need rendering (e.g. smoke tests that save
+screenshots).
 
 | Task | How |
 |---|---|
