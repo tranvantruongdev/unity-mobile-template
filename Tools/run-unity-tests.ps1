@@ -31,7 +31,7 @@ $code = $process.ExitCode
 if (Test-Path $results) {
     [xml]$xml = Get-Content $results
     $run = $xml.'test-run'
-    Write-Host ("Result: {0} — {1} passed, {2} failed, {3} skipped (total {4})" -f $run.result, $run.passed, $run.failed, $run.skipped, $run.total)
+    Write-Host ("Result: {0} - {1} passed, {2} failed, {3} skipped (total {4})" -f $run.result, $run.passed, $run.failed, $run.skipped, $run.total)
     foreach ($case in $xml.SelectNodes("//test-case[@result='Failed']")) {
         Write-Host "  FAILED $($case.fullname)" -ForegroundColor Red
         Write-Host "    $($case.failure.message.'#cdata-section')"

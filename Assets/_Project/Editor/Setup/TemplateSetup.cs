@@ -111,11 +111,34 @@ namespace Template.EditorTools.Setup
             camera.clearFlags = CameraClearFlags.SolidColor;
             camera.backgroundColor = new Color(0.08f, 0.10f, 0.14f);
             cameraObject.AddComponent<AudioListener>();
+            AddGlobalLight2D();
 
             new GameObject($"{name} Controller", controller);
 
             EditorSceneManager.SaveScene(scene, path);
             return path;
+        }
+
+        /// <summary>
+        /// URP 2D draws sprites with lit materials, so a scene without a 2D light renders them black.
+        /// Added through reflection so the template still compiles in projects without URP.
+        /// </summary>
+        private static void AddGlobalLight2D()
+        {
+            var lightType = Type.GetType("UnityEngine.Rendering.Universal.Light2D, Unity.RenderPipelines.Universal.Runtime");
+            if (lightType == null)
+            {
+                return;
+            }
+
+            var light = new GameObject("Global Light 2D").AddComponent(lightType);
+            var typeProperty = lightType.GetProperty("lightType");
+            if (typeProperty != null && typeProperty.CanWrite)
+            {
+                typeProperty.SetValue(light, Enum.Parse(typeProperty.PropertyType, "Global"));
+            }
+
+            lightType.GetProperty("intensity")?.SetValue(light, 1f);
         }
     }
 }
