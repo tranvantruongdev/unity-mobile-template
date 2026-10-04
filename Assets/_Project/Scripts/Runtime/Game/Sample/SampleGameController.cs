@@ -8,6 +8,7 @@ using Template.Infra.Audio;
 using Template.Infra.Device;
 using Template.UI;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 namespace Template.Game.Sample
@@ -32,11 +33,11 @@ namespace Template.Game.Sample
         private RectTransform _root;
         private RectTransform _target;
         private Image _targetImage;
-        private Text _scoreText;
-        private Text _timerText;
-        private Text _hintText;
+        private TextMeshProUGUI _scoreText;
+        private TextMeshProUGUI _timerText;
+        private TextMeshProUGUI _hintText;
         private GameObject _resultsPanel;
-        private Text _resultsText;
+        private TextMeshProUGUI _resultsText;
         private AudioClip _tap;
         private AudioClip _milestone;
         private int _score;
