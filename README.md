@@ -82,7 +82,7 @@ Or set them by hand in Repo → Settings → Secrets and variables → Actions:
 
 | Secret / variable | Value |
 |---|---|
-| `UNITY_LICENSE`, `UNITY_EMAIL`, `UNITY_PASSWORD` | Personal licence for CI. Follow [GameCI activation](https://game.ci/docs/github/activation) |
+| `UNITY_EMAIL`, `UNITY_PASSWORD` | Your Unity login. CI signs in with it (GameCI's `personal` method); a `.ulf` licence file no longer works for Personal seats |
 | `ANDROID_KEYSTORE_BASE64` | `base64 -w0 your.keystore` (create the keystore once in Unity, **back it up**, never commit it) |
 | `ANDROID_KEYSTORE_PASS`, `ANDROID_KEYALIAS_NAME`, `ANDROID_KEYALIAS_PASS` | From your password manager |
 | `BUTLER_API_KEY` | itch.io → Settings → API keys |
