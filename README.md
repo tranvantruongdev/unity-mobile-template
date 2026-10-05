@@ -4,7 +4,7 @@ A starter for small, polished **Unity 6** mobile games: portrait 2D, with Androi
 builds. Every portfolio game starts here (*Tailwind*, *Cadence Club*, *Night Courier*, …).
 
 > **Verified on Unity 6.3 LTS (6000.3.25f1, URP 2D):** compiles cleanly, project setup runs in batch mode,
-> and all 36 EditMode tests pass in Unity (`Tools/run-unity-tests.ps1`). The core tests also run in CI
+> and all 37 EditMode tests pass in Unity (`Tools/run-unity-tests.ps1`). The core tests also run in CI
 > with `dotnet test`.
 
 ## What's inside
