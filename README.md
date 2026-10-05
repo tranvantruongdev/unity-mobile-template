@@ -44,8 +44,10 @@ Localization, Newtonsoft JSON, Test Framework. See `Tools/setup/template-package
 4. Edit `SaveSchema` (`Assets/_Project/Scripts/Core/Save/SaveMigrator.cs`) for your game's save data.
 5. Point `CreateScene("Title", …)` and `CreateScene("Game", …)` in `TemplateSetup.cs` at your own
    controllers (add your runtime assembly to `Template.Editor.asmdef`), then delete
-   `Assets/_Project/Scripts/Runtime/Game/Sample/` and re-run **Apply Project Setup**. The settings popup
-   (`UI/SettingsPanelView`) is shared, so it stays.
+   `Assets/_Project/Scripts/Runtime/Game/Sample/` **and the scenes you re-pointed**
+   (`Assets/_Project/Scenes/Game.unity`, and `Title.unity` if you replaced the title) and re-run
+   **Apply Project Setup**. Setup never overwrites an existing scene, so a kept scene still holds the sample
+   controller. The settings popup (`UI/SettingsPanelView`) is shared, so it stays.
 
 ## Everyday commands
 
